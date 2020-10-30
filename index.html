@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width">
+    <title>Blogin</title>
+    <link rel="stylesheet" href="css/style.css">
+
+        <!--<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
+        <script src="https://kit.fontawesome.com/c75226f30d.js" crossorigin="anonymous"></script>
+</head>
+
+<body onload="init()">
+
+
+
+    <div class="screen" onclick="toggleMenu()"></div>
+    <header class="header">
+        <div class="container main-nav flex flex-align-center flex-space-between">
+            <div class="logo">Blogin</div>
+            <ul class="main-nav-ul flex" >
+                <li><div class="dropdown" > 
+                        <a class="link dropdown" onclick="toggleDropDown()" href="#">Jurnal</a>               
+                        <ul class="dropdown-content">
+                            <li><a href="#">article A</a></li>
+                            <li><a href="#">article B</a></li>
+                        </ul>               
+                    </div>
+                </li>
+                <li><a class="link" href="#">About</a></li>
+                <li><a class="link" href="#">Work</a></li>
+                <li><a class="link" href="#">Contact</a></li>
+                <li><a class="link login" href="#" onclick="toggleAdmin()">Login</a></li>
+                <li><a class="link logout" href="#" onclick="onAdminLogout()">Logout</a></li>
+                <li onclick="toggleMenu()"></li>
+            </ul>
+            <div class="menu-button" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+        </div>
+        
+    </header>
+    <section class="container note">
+        <h2>Log in as admin to edit</h2>
+    </section>
+
+    <section class="sort container">
+            <select class="sort-select" onchange="onSort(this.value)">
+                <option>Sort By...</option>
+                <option value="title">Title</option>
+                <option value="date">Date</option>
+              </select>   
+    </section>
+
+    <main class="main container"> </main>
+
+    <main class="container">
+        <navigation class="flex flex-space-between">
+            <a class="previus" onclick="onPrevPage()"> <i class="fas fa-arrow-left"></i> previus</a>
+            <a class="previus" onclick="onNextPage()"> next <i class="fas fa-arrow-right"></i></a>
+        </navigation>
+    </main>
+
+    <footer class="footer flex flex-direction-column flex-align-center">
+        <div class="logo">Blogin</div>
+        <p>© 2014 Blogin.com  -  All Rights Reserved  -  Find more free Templates at Pixelhint.com</p>
+        <ul class="nav-link flex">
+            <li class="flex flex-align-center justify-content-center"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+            <li class="flex flex-align-center justify-content-center"><a href="#"><i class="fab fa-twitter"></i></i></a></li>
+            <li class="flex flex-align-center justify-content-center"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+            <li class="flex flex-align-center justify-content-center"><a href="#"><i class="fab fa-twitter"></i></i></a></li>
+        </ul>
+    </footer>
+
+    <!-- modals -->
+
+    <div class="readmore-modal flex flex-align-center justify-content-center">
+        <h4>reading more...</h4>
+        <div class="modal-container">
+             <div class="modal-content flex flex-direction-column flex-align-center justify-content-center">
+                <div class="modal-container">       
+                    <div class="modal-content flex flex-direction-column flex-align-center justify-content-center">
+                        <article class="article flex flex-space-between align-items-strech">
+                            <img class="article-img img" src=""/>    
+                            <div class="article-content flex flex-direction-column flex-space-between flex-align-start">
+                                <h6></h6>
+                                <h2></h2>
+                                <p></p>                                   
+                                <a class="btn-article align-self-start" onclick="toggleReadMore()">Close</a>
+                            </div>
+                        </article>
+                    </div>
+                 </div>
+             </div> 
+        </div> 
+     </div>
+
+     <div class="update-modal flex flex-align-center justify-content-center">
+        <h4>Updating post...</h4>
+        <div class="modal-container">       
+            <div class="modal-content flex flex-direction-column flex-align-center justify-content-center">       
+                <div class="images"></div>
+                <article class="article flex flex-space-between align-items-strech">   
+                    <img class="article-img img update-img" id="uimg" name="uimg" data-src="" src=""/>    
+                    <div class="article-content flex flex-direction-column flex-space-between flex-align-start">
+                        <h6></h6>
+                        <input class="input-h2" id="utitle" name="utitle" value=""/>
+                        <textarea class="input-p" id="ucontent" name="ucontent" value=""></textarea> <!-- -->
+                        <a class="btn-article align-self-start" data-postid="" onclick="onUpdataPost(this.dataset.postid, utitle.value, ucontent.value ,uimg.dataset.src)">Update</a>
+                    </div>
+                </article>                 
+            </div>
+         </div>
+     </div>
+
+
+     <div class="admin-modal flex flex-align-center justify-content-center">
+        <h4>Admin...</h4>
+        <div class="modal-container">        
+            <div class="modal-content flex flex-direction-column flex-align-center justify-content-center">  
+                <article class="article flex flex-space-between align-items-strech"> 
+                    <img class="article-img img update-img" src="img/user.png" />  
+                    <div class="article-content flex flex-direction-column flex-space-between flex-align-start"> 
+                        <h2>Admin login</h2>  
+                        <h6>User:admin , Pass:admin</h6>           
+                        <input class="input-user input-admin" id="userName" name="userName" value=""/>                
+                        <input class="input-password input-admin" id="userPass" name="userPass" value=""/>
+                        <div class="buttons">
+                            <a class="btn-article align-self-start" onclick="onAdminLogin(userName.value, userPass.value)">Login</a>                
+                            <a class="btn-article align-self-start" onclick="toggleAdmin()">Cancel</a>                
+                        </div>
+                    </div>
+                </article>  
+            </div>  
+         </div>
+     </div>
+
+
+    <script src="js/storage-service.js"></script>
+    <script src="js/util-service.js"></script>
+    <script src="js/post-service.js"></script>
+    <script src="js/post-controller.js"></script>
+    
+    
+
+
+
+    <script>
+
+    </script>
+   
+</body>
+
+</html>
